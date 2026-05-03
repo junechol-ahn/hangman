@@ -36,6 +36,10 @@ init();
 const correctLetters = [];
 const wrongLetters = [];
 
+function getAnswerMessage() {
+  return `정답: ${selectedWord}`
+}
+
 function restartGame() {
   correctLetters.length = 0
   wrongLetters.length = 0
@@ -57,7 +61,7 @@ function displayWord() {
   console.log(innerWord)
 
   if (innerWord === selectedWord) {
-    finalMessage.innerText = "축하합니다! 승리했습니다! 😊"
+    finalMessage.innerText = `축하합니다! 승리했습니다! 😊\n${getAnswerMessage()}`
     popup.style.display = 'flex'
   }
 }
@@ -79,7 +83,7 @@ function updateWrongLettersEl() {
   })
 
   if (wrongLetters.length === figureParts.length) {
-    finalMessage.innerText = "아쉽게도 졌습니다. 😭"
+    finalMessage.innerText = `아쉽게도 졌습니다. 😭\n${getAnswerMessage()}`
     popup.style.display = 'flex'
   }
 }

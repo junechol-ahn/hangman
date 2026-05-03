@@ -91,6 +91,10 @@ h1 {
   text-align: center;
 }
 
+.popup h2 {
+  white-space: pre-line;
+}
+
 .popup button {
   cursor: pointer;
   background-color: #fff;
