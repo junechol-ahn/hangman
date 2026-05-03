@@ -1,7 +1,6 @@
 const wrongLettesEl = document.getElementById('wrong-letters');
 const playAgainBtn = document.getElementById('play-button');
 const popup = document.getElementById('popup-container');
-const notification = document.getElementById('notification-container');
 const finalMessage = document.getElementById('final-message');
 const wordEl = document.getElementById('word');
 const keyboardEl = document.getElementById('keyboard');
@@ -93,14 +92,6 @@ function updateWrongLettersEl() {
   }
 }
 
-function showNotification() {
-  notification.classList.add('show')
-
-  setTimeout(()=>{
-    notification.classList.remove('show')
-  }, 2000)
-}
-
 playAgainBtn.addEventListener('click', ()=>{
   restartGame()
 })
@@ -118,8 +109,6 @@ function handleLetter(letter) {
 
   if (correctLetters.includes(normalizedLetter) 
     || wrongLetters.includes(normalizedLetter)) {
-    console.log('이미 사용한 글자입니다')
-    showNotification()
     return
   }
 
