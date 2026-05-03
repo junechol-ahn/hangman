@@ -4,6 +4,8 @@ const popup = document.getElementById('popup-container');
 const notification = document.getElementById('notification-container');
 const finalMessage = document.getElementById('final-message');
 const wordEl = document.getElementById('word');
+const letterInput = document.getElementById('letter-input');
+const gameContainer = document.querySelector('.game-container');
 
 const figureParts = document.querySelectorAll('.figure-part');
 
@@ -47,6 +49,7 @@ function restartGame() {
   updateWrongLettersEl()
   displayWord()
   popup.style.display = 'none'
+  letterInput.focus()
 }
 
 function displayWord() {
@@ -100,24 +103,40 @@ playAgainBtn.addEventListener('click', ()=>{
   restartGame()
 })
 
+gameContainer.addEventListener('click', ()=>{
+  letterInput.focus()
+})
 
-// 키보드 알파벳 입력 처리
-window.addEventListener('keydown', e => {
-  const isAlphabet = /^[a-z]$/i.test(e.key)
+letterInput.addEventListener('input', e => {
+  const letter = e.target.value
+  e.target.value = ''
+  handleLetter(letter)
+})
+
+function handleLetter(letter) {
+  const normalizedLetter = letter.toLowerCase()
+  const isAlphabet = /^[a-z]$/.test(normalizedLetter)
   if (!isAlphabet) return
 
-  if (correctLetters.includes(e.key) 
-    || wrongLetters.includes(e.key)) {
+  if (correctLetters.includes(normalizedLetter) 
+    || wrongLetters.includes(normalizedLetter)) {
     console.log('이미 사용한 글자입니다')
     showNotification()
     return
   }
 
-  if (selectedWord.includes(e.key)) {
-    correctLetters.push(e.key)
+  if (selectedWord.includes(normalizedLetter)) {
+    correctLetters.push(normalizedLetter)
   } else {
-    wrongLetters.push(e.key)
+    wrongLetters.push(normalizedLetter)
     updateWrongLettersEl()
   }
   displayWord()
+}
+
+
+// 키보드 알파벳 입력 처리
+window.addEventListener('keydown', e => {
+  if (e.target === letterInput) return
+  handleLetter(e.key)
 })
