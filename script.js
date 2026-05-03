@@ -57,14 +57,14 @@ function displayWord() {
   console.log(innerWord)
 
   if (innerWord === selectedWord) {
-    finalMessage.innerText = "Congratulations! You won! 😊"
+    finalMessage.innerText = "축하합니다! 승리했습니다! 😊"
     popup.style.display = 'flex'
   }
 }
 
 function updateWrongLettersEl() {
   wrongLettesEl.innerHTML = `
-    ${wrongLetters.length > 0 ? '<p>Wrong</p>': ''}
+    ${wrongLetters.length > 0 ? '<p>틀린 글자</p>': ''}
     ${wrongLetters.map(letter=>`<span>${letter}</span>`)}
   `
 
@@ -79,7 +79,7 @@ function updateWrongLettersEl() {
   })
 
   if (wrongLetters.length === figureParts.length) {
-    finalMessage.innerText = "Unfortunately you lost. 😭"
+    finalMessage.innerText = "아쉽게도 졌습니다. 😭"
     popup.style.display = 'flex'
   }
 }
@@ -97,14 +97,14 @@ playAgainBtn.addEventListener('click', ()=>{
 })
 
 
-// keydown letter press
+// 키보드 알파벳 입력 처리
 window.addEventListener('keydown', e => {
   const isAlphabet = /^[a-z]$/i.test(e.key)
   if (!isAlphabet) return
 
   if (correctLetters.includes(e.key) 
     || wrongLetters.includes(e.key)) {
-    console.log('already used letter')
+    console.log('이미 사용한 글자입니다')
     showNotification()
     return
   }
@@ -117,4 +117,3 @@ window.addEventListener('keydown', e => {
   }
   displayWord()
 })
-

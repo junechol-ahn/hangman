@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Hangman</title>
+  <title>행맨 게임</title>
 </head>
 <body>
-  <h1>Hangman</h1>
-  <p>Find the hidden word - Enter a letter</p>
+  <h1>행맨 게임</h1>
+  <p>숨겨진 영어 단어를 맞혀보세요. 알파벳을 입력하세요.</p>
   <div class="game-container">
     <svg height="250" width="200" class="figure-container">
       <line x1="60" y1="20" x2="140" y2="20"/>
@@ -35,17 +35,17 @@
     </div>
   </div>
 
-  <!-- Container for final message -->
+  <!-- 최종 메시지 -->
   <div class="popup-container" id="popup-container">
     <div class="popup">
-      <h2 id="final-message">You Have Won</h2>
-      <button id="play-button">Play Again</button>
+      <h2 id="final-message">승리했습니다!</h2>
+      <button id="play-button">다시 시작</button>
     </div>
   </div>
 
-  <!-- Notification -->
+  <!-- 알림 -->
   <div class="notification-container" id="notification-container">
-    <p>You hav already entered this letter</p>
+    <p>이미 입력한 글자입니다.</p>
   </div>
   <script src="script.js"></script>
 </body>
