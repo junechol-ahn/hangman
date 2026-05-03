@@ -4,10 +4,10 @@ const popup = document.getElementById('popup-container');
 const notification = document.getElementById('notification-container');
 const finalMessage = document.getElementById('final-message');
 const wordEl = document.getElementById('word');
-const letterInput = document.getElementById('letter-input');
-const gameContainer = document.querySelector('.game-container');
+const keyboardEl = document.getElementById('keyboard');
 
 const figureParts = document.querySelectorAll('.figure-part');
+const keyboardRows = ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'];
 
 let words = [];
 let selectedWord = '';
@@ -31,8 +31,10 @@ async function init() {
   resetWord(6, 10);
   console.log(selectedWord);
   displayWord()
+  updateKeyboardButtons()
 }
 
+renderKeyboard();
 init();
 
 const correctLetters = [];
@@ -48,8 +50,8 @@ function restartGame() {
   resetWord(6,10)
   updateWrongLettersEl()
   displayWord()
+  updateKeyboardButtons()
   popup.style.display = 'none'
-  letterInput.focus()
 }
 
 function displayWord() {
@@ -103,20 +105,16 @@ playAgainBtn.addEventListener('click', ()=>{
   restartGame()
 })
 
-gameContainer.addEventListener('click', ()=>{
-  letterInput.focus()
-})
-
-letterInput.addEventListener('input', e => {
-  const letter = e.target.value
-  e.target.value = ''
-  handleLetter(letter)
+keyboardEl.addEventListener('click', e => {
+  if (!e.target.classList.contains('keyboard-key')) return
+  handleLetter(e.target.dataset.letter)
 })
 
 function handleLetter(letter) {
   const normalizedLetter = letter.toLowerCase()
   const isAlphabet = /^[a-z]$/.test(normalizedLetter)
   if (!isAlphabet) return
+  if (!selectedWord || popup.style.display === 'flex') return
 
   if (correctLetters.includes(normalizedLetter) 
     || wrongLetters.includes(normalizedLetter)) {
@@ -132,11 +130,34 @@ function handleLetter(letter) {
     updateWrongLettersEl()
   }
   displayWord()
+  updateKeyboardButtons()
 }
 
+function renderKeyboard() {
+  keyboardEl.innerHTML = keyboardRows.map(row => `
+    <div class="keyboard-row">
+      ${row.split('').map(letter => `
+        <button class="keyboard-key" type="button" data-letter="${letter}" aria-label="${letter}">
+          ${letter}
+        </button>
+      `).join('')}
+    </div>
+  `).join('')
+}
+
+function updateKeyboardButtons() {
+  keyboardEl.querySelectorAll('.keyboard-key').forEach(button => {
+    const letter = button.dataset.letter
+    const isCorrect = correctLetters.includes(letter)
+    const isWrong = wrongLetters.includes(letter)
+
+    button.disabled = isCorrect || isWrong
+    button.classList.toggle('correct', isCorrect)
+    button.classList.toggle('wrong', isWrong)
+  })
+}
 
 // 키보드 알파벳 입력 처리
 window.addEventListener('keydown', e => {
-  if (e.target === letterInput) return
   handleLetter(e.key)
 })

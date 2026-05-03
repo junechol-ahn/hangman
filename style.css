@@ -9,9 +9,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 80vh;
+  min-height: 100vh;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -73,22 +73,58 @@ h1 {
   width: 20px;
 }
 
-.letter-input {
+.keyboard {
+  display: grid;
+  gap: 8px;
+  margin: 0 auto 24px;
+  max-width: 720px;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.keyboard-key {
   background-color: #fff;
   border: 0;
   border-radius: 5px;
   color: #2c3e50;
+  cursor: pointer;
   font-size: 18px;
-  margin: 0 auto 20px;
-  max-width: calc(100vw - 40px);
-  padding: 12px 16px;
-  text-align: center;
-  width: 280px;
+  font-weight: 700;
+  height: 44px;
+  min-width: 30px;
+  padding: 0;
+  text-transform: uppercase;
+  width: 48px;
 }
 
-.letter-input:focus {
+.keyboard-key:active {
+  transform: scale(0.95);
+}
+
+.keyboard-key:focus {
   box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.45);
   outline: 0;
+}
+
+.keyboard-key.correct {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+.keyboard-key.wrong {
+  background-color: #95a5a6;
+  color: #ecf0f1;
+}
+
+.keyboard-key:disabled {
+  cursor: default;
+  opacity: 0.75;
 }
 
 .popup-container {
@@ -146,4 +182,34 @@ h1 {
 
 .notification-container p {
   margin: 0;
+}
+
+@media (max-width: 520px) {
+  body {
+    padding: 0 10px;
+  }
+
+  .game-container {
+    height: 320px;
+    max-width: 100%;
+    padding: 10px 16px;
+    width: 100%;
+  }
+
+  .keyboard {
+    gap: 7px;
+    padding: 0;
+  }
+
+  .keyboard-row {
+    gap: 4px;
+  }
+
+  .keyboard-key {
+    flex: 1;
+    font-size: 15px;
+    height: 42px;
+    min-width: 0;
+    width: auto;
+  }
 }
