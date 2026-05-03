@@ -149,6 +149,17 @@ h1 {
   white-space: pre-line;
 }
 
+.answer-link {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.answer-link:focus {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
 .popup button {
   cursor: pointer;
   background-color: #fff;

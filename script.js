@@ -39,8 +39,24 @@ init();
 const correctLetters = [];
 const wrongLetters = [];
 
-function getAnswerMessage() {
-  return `정답: ${selectedWord}`
+function getDictionaryUrl(word) {
+  return `https://en.dict.naver.com/#/search?query=${encodeURIComponent(word)}`
+}
+
+function showFinalMessage(message) {
+  const answerLink = document.createElement('a')
+  answerLink.className = 'answer-link'
+  answerLink.href = getDictionaryUrl(selectedWord)
+  answerLink.target = '_blank'
+  answerLink.rel = 'noopener noreferrer'
+  answerLink.textContent = selectedWord
+
+  finalMessage.replaceChildren(
+    message,
+    document.createElement('br'),
+    '정답: ',
+    answerLink
+  )
 }
 
 function restartGame() {
@@ -65,7 +81,7 @@ function displayWord() {
   console.log(innerWord)
 
   if (innerWord === selectedWord) {
-    finalMessage.innerText = `축하합니다! 승리했습니다! 😊\n${getAnswerMessage()}`
+    showFinalMessage('축하합니다! 승리했습니다! 😊')
     popup.style.display = 'flex'
   }
 }
@@ -87,7 +103,7 @@ function updateWrongLettersEl() {
   })
 
   if (wrongLetters.length === figureParts.length) {
-    finalMessage.innerText = `아쉽게도 졌습니다. 😭\n${getAnswerMessage()}`
+    showFinalMessage('아쉽게도 졌습니다. 😭')
     popup.style.display = 'flex'
   }
 }
