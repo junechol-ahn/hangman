@@ -142,9 +142,10 @@ function updateWrongLettersEl() {
   `
 
   figureParts.forEach((part, index)=>{
-    const errors = wrongLetters.length
+    const bonus = getBonusChances(selectedWord);
+    const errorsToDraw = wrongLetters.length - bonus;
 
-    if (index < errors) {
+    if (index < errorsToDraw) {
       part.style.display = 'block'
     } else {
       part.style.display = 'none'
