@@ -18,6 +18,34 @@ h1 {
   margin: 20px 0 0;
 }
 
+.level-selector {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  margin: 12px 0 4px;
+}
+
+.level-selector span {
+  font-weight: 700;
+}
+
+.level-selector select {
+  background-color: #fff;
+  border: 0;
+  border-radius: 5px;
+  color: #2c3e50;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  min-width: 140px;
+  padding: 8px 12px;
+}
+
+.level-selector select:focus {
+  box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.45);
+  outline: 0;
+}
+
 .game-container {
   padding: 20px 30px;
   position: relative;
@@ -48,6 +76,14 @@ h1 {
 
 .wrong-letters-container p {
   margin: 0 0 5px;
+}
+
+.chance-count {
+  font-weight: 700;
+}
+
+.wrong-letter-list {
+  min-height: 30px;
 }
 
 .wrong-letters-container span {
